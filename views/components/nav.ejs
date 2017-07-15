@@ -1,0 +1,33 @@
+<nav class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">书友</a>
+      <span class="page-title"><%= ebook.pageTitle %></span>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="<%= page === 'book-index' ? 'active' : '' %>"><a href="/">首页</a></li>
+        <li class="<%= page === 'bookcase' ? 'active' : '' %>"><a href="/book/bookcase">我的书架</a></li>
+        <% if (user) { %>
+          <li class="<%= page === 'home-page' ? 'active' : '' %>"><a href="/home"><%= user.username; %></a></li>
+          <li><a href="/logout">退出</a></li>
+        <% } else { %>
+          <li class="<%= page === 'login-page' ? 'active' : '' %>"><a href="/login">登录</a></li>
+        <% } %>
+      </ul>
+      <div class="navbar-form navbar-right">
+        <!-- <input class="v-inp" type="text" name="name" placeholder="请输入书名"></input> -->
+        <form action="/book/search">
+          <input type="search" name="name">
+          <input type="submit">
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>

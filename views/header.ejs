@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= ebook.title %></title>
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.min.css?t=<%= Date.parse(new Date()) %>" rel="stylesheet">
+
+    <script src="/js/base.js"></script>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <%- include('./components/nav-2') %>
+    <%- include('./components/popu-board') %>
+	  <div class="container page-content" id="<%= page; %>">

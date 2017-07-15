@@ -1,0 +1,14 @@
+node_modules/
+*.log
+logs/*
+public/img/*
+public/tmp/*
+public/resource/*
+
+public/avatar/*
+!public/avatar/default.jpg
+
+config/*
+!config/default.*
+
+!**/.gitkeep

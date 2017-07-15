@@ -1,0 +1,15 @@
+<%- include('../header-width') %>
+
+<div class="container">
+	<div class="col-md-12">
+		<div><%= message %></div>
+		<h1><%= type.name %></h1>
+		<div class="row books-block">
+			<%- include('../components/books-list-2') %>
+		</div>
+		<%- include('../components/paging') %>
+	</div>
+</div>
+
+
+<%- include('../footer') %>

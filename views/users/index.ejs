@@ -1,0 +1,58 @@
+<%- include('../header-width') %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			用户名: <%= user.username; %>
+		</div>
+		<% if (user.type == 'admin') { %>
+			<div class="col-md-6">
+				<a href="/book/add/book" title="">添加书籍</a>
+			</div>
+		<% } %>
+		<div class="col-md-6">
+			<a href="/home/update/" title="">修改用户信息</a>
+		</div>
+		<div class="col-md-6">
+			<a href="/home/password/" title="">修改密码</a>
+		</div>
+		<div class="col-md-6">
+			<% if (user.is_cookie) { %>
+				<a class="is-auto-set active" href="/ajax/user/is-auto-login" title="">取消自动登录</a>
+			<% } else { %>
+				<a class="is-auto-set" href="/ajax/user/is-auto-login" title="">设置自动登录</a>
+			<% } %>
+		</div>
+		<div class="col-md-6">
+			<% if (user.is_auto_bookmark) { %>
+				<a class="is-auto-set active" href="/ajax/user/is-auto-bookmark">取消自动保存书签（已经加入书架的书）</a>
+			<% } else { %>
+				<a class="is-auto-set" href="/ajax/user/is-auto-bookmark">设置自动保存书签（已经加入书架的书）</a>
+			<% } %>
+		</div>
+		<div class="col-md-6 avatar">
+			<a href="/home/avatar/" title=""> <img src="/avatar/<%= user.avatar ? user.avatar : 'default.jpg'; %>" alt=""></a>
+		</div>
+	</div>
+</div>
+
+<script>
+	jQuery(document).ready(function($) {
+		$('.is-auto-set').click(function(event) {
+			event.preventDefault();
+			var active = 1;
+			if ($(this).hasClass('active')) {
+				active = 0;
+				$(this).removeClass('active').text($(this).text().replace('取消', '设置'));
+			} else {
+				$(this).addClass('active').text($(this).text().replace('设置', '取消'));
+			}
+			var url = $(this).attr('href') + '?' + Math.random();
+			$.post(url, {active: active}, function(data, textStatus, xhr) {
+				addPopup(data.message);
+			});
+		});
+	});
+</script>
+
+<%- include('../footer') %>

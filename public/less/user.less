@@ -1,0 +1,145 @@
+.formRule();
+
+#login-page {
+  background-color: #eee;
+  padding-top: 40px;
+	.container {
+		.userAuthForm();
+		.auth-form {
+		  .form-group {
+		  	> label {
+		  		width: 100%;
+		  	}
+		  }
+		  .forgot {
+		  	float: right;
+		  	font-size: 12px;
+		  	font-weight: normal;
+		  }
+		}
+	}
+}
+
+#register-page {
+  padding-top: 40px;
+  background-color: #eee;
+	.container {
+		.userAuthForm();
+	}
+}
+
+.forgot-password {
+  padding-top: 40px;
+	.userAuthForm();
+	form {
+		.captcha {
+			img {
+				width: 140px;
+				height: 40px;
+				font-size: 0;
+			}
+		}
+	}
+}
+
+#home-page {
+	.container {
+		.row {
+			.col-md-6 {
+				padding: 20px 0;
+			}
+		}
+	}
+	.avatar {
+		img {
+			width: 120px;
+		}
+	}
+}
+
+#uplaod-avatar-page {
+	.beauty-input-board {
+		margin-top: 40px;
+		.avatar-desc {
+			margin: 15px 0;
+		}
+		form {
+			text-align: center;
+			#preview {
+				margin: auto;
+				width: 280px;
+				text-align: center;
+				margin-bottom: 15px;
+				padding: 15px;
+				border: 1px dashed #000;
+				max-height: 300px;
+				img {
+					max-width: 90%;
+					max-height: 90%;
+				}
+				.error {
+					margin: 10px 0;
+					line-height: 32px;
+				}
+			}
+			.file {
+				label {
+					width: 200px;
+				}
+			}
+		}
+	}
+	#drop_area{
+		margin-top: 40px;
+		padding-top: 200px;
+		width: 400px;
+		height: 400px;
+		background-color: #ccc;
+		border: 2px dashed #000;
+		text-align: center;
+	}
+}
+
+.change-pwd {
+	.userAuthForm();
+}
+
+.userAuthForm() {
+	.auth-form {
+	  max-width: 330px;
+	  padding: 15px;
+	  margin: 0 auto;
+	  background: #fff;
+	  .form-signin-heading {
+	  	text-align: center;
+	  	margin-bottom: 20px;
+	  	font-size: 24px;
+	  }
+	  .form-group {
+	  	> label {
+	  		width: 100%;
+	  	}
+	  }
+	  .change-action {
+	  	padding: 15px 20px;
+	    text-align: center;
+	    border: 1px solid #d8dee2;
+	    border-radius: 5px;
+	    margin-top: 16px;
+	  }
+	}
+}
+
+.formRule() {
+	form {
+	  .error {
+	  	color: red;
+	  	padding-left: 2em;
+	  }
+	  .form-errors {
+	  	text-align: center;
+	  	color: red;
+	  	line-height: 32px;
+	  }
+	}
+}

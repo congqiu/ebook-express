@@ -1,0 +1,65 @@
+<%- include('../header-width'); %>
+<% var page_bookId = hashEncodeId(book.id); %>
+<div class="container">
+	<div class="row book-board" data-book="<%= page_bookId %>">
+		<div class="col-md-12">
+			<div class="row bookinfo">
+				<div class="col-md-7 name df">
+					<h1><%= book.name; %></h1>
+					<span>作者：<%= book.author; %></span>
+				</div>
+				<div class="col-md-5 operation">
+					<a class="add-bookcase" href="javascript:void(0);" title="">加入书架</a>
+					<a href="#footer" title="">直达底部</a>
+					<% if (user && (user.type === 'admin' || book.status === 2)) { %>
+						<a class="download" href="/download/<%= book.name; %>.txt" title="">下载本书</a>
+					<% } %>
+				</div>
+			</div>
+			<div class="row latest">
+				<% if (latest) { %>
+				<div class="col-md-8">
+					<div>
+						最新章节：<a href="/book/<%= page_bookId; %>/<%= hashEncodeId(latest.num); %>"><%= latest.title; %></a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<span>状态：<%= book.source_status; %></span>
+					<span>更新时间：<%= latest.create_time; %></span>
+				</div>
+				<% } %>
+			</div>
+			<div class="row desc">
+				<div class="col-md-12">
+					内容简介： <%= book.source_desc; %>		
+				</div>
+			</div>
+			<div class="row catalogs">
+				<div class="col-md-12">
+					<div>
+						<%= message; %>
+					</div>
+					<ul class="df">
+						<% catalogs.forEach (function (catelog) { %>
+							<li><a href="/book/<%= page_bookId; %>/<%= hashEncodeId(catelog.num); %>"><%= catelog.title; %></a></li>
+						<% }); %>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	jQuery(document).ready(function($) {
+		$('.add-bookcase').click(function(event) {
+			event.preventDefault();
+			var book = $('.book-board').data('book');
+			$.post('/ajax/book/add/bookcase', {book: book}, function(data, textStatus, xhr) {
+				addPopup(data.message);
+			});
+		});
+	});
+</script>
+
+<%- include('../footer') %>

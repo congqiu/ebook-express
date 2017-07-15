@@ -1,0 +1,15 @@
+<ul class="items">
+<% books.forEach(function (book) { %>
+	<li class="col-md-12 item">
+		<h3><a href="/book/<%= hashEncodeId(book.id); %>" title="<%= book.name; %>"><%= book.name; %></a></h3>
+		<div class="df">
+			<div class="author">作者： <%= book.author; %></div>
+			<div class="status"><%= book.source_status; %></div>
+		</div>
+		<div class="desc"><%= book.source_desc; %></div>
+	</li>
+<% });
+if (books.length <= 0) { %>
+	没有相关书籍
+<% } %>
+</ul>

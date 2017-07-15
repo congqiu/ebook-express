@@ -1,0 +1,30 @@
+<%- include('header-width') %>
+
+  <div class="container">
+    <div class="auth-form">
+      <form class="form-signin" role="form" action="/register" method="post">
+        <h2 class="form-signin-heading">用户注册</h2>
+        <div class="form-errors"><%= typeof errors === 'string' ? errors : '' %></div>
+        <div class="form-group">
+          <label for="username">用户名<span class="error"><%= errors.username ? errors.username.msg : '' %></span></label>
+          <input type="text" name="username" class="form-control" placeholder="用户名" required >
+        </div>
+        <div class="form-group">
+          <label for="email">邮箱<span class="error"><%= errors.email ? errors.email.msg : '' %></span></label>
+          <input type="email" name="email" class="form-control" placeholder="邮箱" required>
+        </div>
+        <div class="form-group">
+          <label for="password">密码<span class="error"><%= errors.password ? errors.password.msg : '' %></span></label>
+          <input type="password" name="password" class="form-control" placeholder="密码" required>
+        </div>
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+      </form>
+      <div class="change-action">
+        已有账号？
+        <a href="/login" title="去登录">去登录</a>
+      </div>
+  </div>
+  <script src="/js/user.js"></script>
+  
+<%- include('footer') %>

@@ -1,0 +1,7 @@
+<% books.forEach(function (book) { %>
+	<div class="col-md-3 item">
+		<h3><a href="/book/<%= hashEncodeId(book.id); %>" title="<%= book.name; %>"><%= book.name; %></a></h3>
+		<div class="author">作者： <%= book.author; %></div>
+		<div class="desc"><%= book.source_desc; %></div>
+	</div>
+<% }); %>

@@ -1,0 +1,63 @@
+<%- include('../header-width') %>
+
+<div class="container">
+	<div class="row bookcase-board">
+		<div class="col-md-12">
+			<div><%= message %></div>
+			<div class="row bookcase-lists">
+				<div class="col-md-12">
+					<div class="items">
+						<% bookcases.forEach (function(bookcase, index) { 
+							var page_bookId = hashEncodeId(bookcase.book);
+						%>
+							<div class="item clearfix" data-book="<%= page_bookId; %>">
+								<div class="name">
+									<span>书名：</span>
+									<a href="/book/<%= page_bookId; %>" title="<%= bookcase.name; %>"><%= bookcase.name; %></a>
+								</div>
+								<div class="latest">
+									<span>最新：</span>
+									<% if (bookcase.title2) {%>
+										<a href="/book/<%= page_bookId; %>/<%= hashEncodeId(bookcase.num2); %>"><%= bookcase.title2; %></a>
+									<% } %>
+								</div>
+								<div class="bookmark">
+									<span>书签：</span>
+									<% if (bookcase.title) {%>
+										<a href="/book/<%= page_bookId; %>/<%= hashEncodeId(bookcase.num); %>"><%= bookcase.title; %></a>
+									<% } %>
+								</div>
+								<div class="operation">
+									<a class="remove-bookcase">移除</a>
+									<% if (bookcase.title && bookcase.num != bookcase.num2) { %>
+										<span class="label label-info">New</span>
+									<% } %>
+								</div>
+							</div>
+						<% }); %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	jQuery(document).ready(function($) {
+		$('.remove-bookcase').click(function(event) {
+			event.preventDefault();
+			if (window.confirm('确定移除该书？')) {
+				var item = $(this).parents('.item');
+				var book = item.data('book');
+				$.post('/ajax/book/remove/bookcase', {book: book}, function(data, textStatus, xhr) {
+					addPopup(data.message);
+					if (data.success) {
+						item.remove();
+					}
+				});
+			}
+		});
+	});
+</script>
+
+<%- include('../footer') %>

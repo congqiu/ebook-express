@@ -1,0 +1,55 @@
+<%- include('../header-width') %>
+
+<div class="container">
+	<div class="col-md-12">
+		<div><%= message %></div>
+		<div class="row books-block">
+			<div class="items">
+				<h3>最新小说</h3>
+				<%- include('../components/books-list') %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="book-types books-block">
+			<% types.forEach(function (type) { %>
+				<div class="book-type" data-type="<%= type.id; %>">
+					<h3><a href="/book/category/<%= type.id; %>" title="<%= type.name; %>"><%= type.name; %></a></h3>
+					<div class="type-books clearfix">
+						
+					</div>
+				</div>
+			<% }); %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	jQuery(document).ready(function($) {
+		$('.book-types .book-type').each(function(index, el) {
+			var type = $(this).data('type');
+			var ele = $(this);
+			$.ajax({
+				url: '/book/category/' + type,
+				type: 'GET',
+				dataType: 'html',
+				data: {callback: Math.random().toString(36).substring(2)}
+			})
+			.done(function(data) {
+				ele.find('.type-books').append(data);
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+		});
+		
+		// $.get('/book/category/1', function(data) {
+		// 	console.log(data)
+		// });
+	});
+</script>
+
+<%- include('../footer') %>
