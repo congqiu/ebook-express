@@ -14,6 +14,7 @@
       <ul class="nav navbar-nav">
         <li class="<%= page === 'book-index' ? 'active' : '' %>"><a href="/">首页</a></li>
         <li class="<%= page === 'bookcase' ? 'active' : '' %>"><a href="/book/bookcase">我的书架</a></li>
+        <li class="<%= page === 'chat-page' ? 'active' : '' %>"><a href="/chat">聊书</a></li>
         <% if (user) { %>
           <li class="<%= page === 'home-page' ? 'active' : '' %>"><a href="/home"><%= user.username; %></a></li>
           <li><a href="/logout">退出</a></li>

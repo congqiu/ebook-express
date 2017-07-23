@@ -7,15 +7,17 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var Hashids = require('hashids');
+var io = require('socket.io')();
 
 var session = require('express-session');
 var flash = require('connect-flash');
 var config = require('config-lite')(__dirname);
+var RedisStore = require('connect-redis')(session);
 
 var winston = require('winston');
 var expressWinston = require('express-winston');
 
-var index = require('./routes/index');
+var index = require('./routes/index')(io);
 var users = require('./routes/users');
 var books = require('./routes/books');
 var ajaxs = require('./routes/ajaxs');
@@ -35,6 +37,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressValidator());
+
+ 
+var sessionStore = new RedisStore({
+  "host": "127.0.0.1",
+  "port": "6379",
+});
 
 app.use(expressValidator({
  customValidators: {
@@ -66,7 +74,8 @@ app.use(session({
 	name: config.session.key,
 	secret: config.session.secret,
 	resave: true,
-	saveUninitialized: false,
+	saveUninitialized: true,
+  store: sessionStore,
 	cookie: {
 		maxAge: config.session.maxAge
 	}
@@ -95,6 +104,9 @@ app.use(function (req, res, next) {
   }
 	next();
 })
+
+app.io = io;
+var socketLib = require('./lib/socket')(io, sessionStore);
 
 
 // 正常请求的日志

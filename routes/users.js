@@ -35,7 +35,7 @@ router.get('/login', checkNotLogin, function(req, res, next) {
   res.locals.ebook.title = '用户登录';
 
   var referer = req.headers.referer;
-  if (referer.indexOf('/login') < 0) {
+  if (referer && referer.indexOf('/login') < 0) {
     referer = encodeURIComponent(referer);
   } else {
     referer = null;
