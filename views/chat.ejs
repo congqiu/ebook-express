@@ -1,54 +1,58 @@
 <%- include('header-width') %>
-
-    <div class="container">
-      <div class="users-list">
-        
-      </div>
-      <div class="wrapper">
-        <div class="banner">
-          <span id="status"></span>
-        </div>
-        <div id="historyMsgs">
-        </div>
-        <div class="send-board">
-          <div class="items operations">
-            <input name="color" type="color" placeHolder='#000' title="字体颜色" >
-            <input name="emoji" type="button" value="表情">
-            <label for="sendImage" class="image-lable">
-                <input type="button" value="图片">
-                <input id="sendImage" name="image" type="file" value="图片" accept="image/*">
-            </label>
-            <input name="clear" type="button" value="清屏">
-            <!-- <input name="skin" type="button" value="换肤"> -->
+  <div class="container">
+      <div class="row">
+        <div class="col-md-12 chat-board">
+          <div class="chat-header clearfix">
+            <span id="status"></span>
           </div>
-          <textarea class="message" placeHolder="输入消息"></textarea>
-          <div class="message" contenteditable="true"></div>
-          <input class="btn btn-send" type="button" value="发送">
-          <div class="emoji-board">
-          	<div class="emoji-body">
-          		<div class="item item-0"></div>
-          		<div class="item item-1"></div>
-          	</div>
-          	<div class="emoji-tabs">
-          		<span class="active" data-type="0">经典表情</span>
-          		<span data-type="1">流氓兔</span>
-          	</div>
+          <div class="msgs-board">
+            <ul id="chat-all">
+              
+            </ul>
           </div>
-          <!-- <div class="skin-board">
-            <div class="skins-body"></div>
-          </div> -->
+          <div class="send-board" data-to="all">
+            <div class="items operations">
+              <input class="btn" name="emoji" type="button" value="表情">
+              <label for="sendImage" class="image-lable">
+                  <input class="btn" type="button" value="图片">
+                  <input id="sendImage" name="image" type="file" value="图片" accept="image/*">
+              </label>
+              <input class="btn" name="clear" type="button" value="清屏">
+            </div>
+            <textarea class="message" placeHolder="输入消息"></textarea>
+            <div class="message" contenteditable="true"></div>
+            <input class="btn btn-info btn-send" type="button" value="发送">
+            <div class="emoji-board">
+              <div class="emoji-body">
+                <div class="item item-0"></div>
+                <div class="item item-1"></div>
+              </div>
+              <div class="emoji-tabs">
+                <span class="active" data-type="0">经典表情</span>
+                <span data-type="1">流氓兔</span>
+              </div>
+            </div>
+            <div class="toast-board">
+              
+            </div>
+          </div>
         </div>
       </div>
     </div>
-	  <div class="before-login">
-      <label class="info">连接服务器</label>
-	  </div>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="js/chat.js"></script>
-    <script>
-    	var socket = io();
-      var currentUser = <%= user ? user.id : 0; %>;
-      $.clChat({socket: socket, currentUser: currentUser});
-    </script>
+  <div class="before-login">
+    <label class="info">连接服务器</label>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/chat.js"></script>
+  <script>
+  	var socket = io();
+    var staticUrl = '<%= staticUrl; %>';
+    $.clChat({socket: socket, staticUrl: staticUrl});
+    $('.msgs-board').mCustomScrollbar({
+      theme: "minimal-dark",
+      'scrollTo': 'bottom',
+      scrollInertia: 300,
+    });
+  </script>
 <%- include('footer') %>
   

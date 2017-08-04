@@ -477,37 +477,150 @@ button:hover {
     text-align: center;
     display: block;
     padding-top: 200px;
+    label.info {
+      color: #fff;
+    }
+    .user-action {
+      >div {
+        padding: 0 10%;
+        .form-control {
+          margin-bottom: 15px;
+        }
+      }
+    }
   }
   .container {
-    .wrapper {
-      width: 500px;
-      padding: 5px;
-      margin: 0 auto;
-      background-color: #ddd;
+    max-width: 730px;
+    background: #fff;
+    .chat-board {
+      border: 1px solid #efefef;
+      .chat-header {
+        height: 39px;
+        line-height: 39px;
+        border-bottom: 1px solid #eee;
+      }
     }
-    #historyMsgs {
+    .msgs-board {
       height: 400px;
-      background-color: #fff;
-      overflow: auto;
-      padding: 2px;
-      img {
-        max-width: 50%;
-        display: block;
+      max-height: 100%;
+      ul {
+        list-style: none;
+        background-color: #fff;
+        padding: 2px;
+        li {
+          margin-bottom: 15px;
+          .time {
+            margin: 7px 0;
+            text-align: center;
+            >span {
+              display: inline-block;
+              padding: 0 18px;
+              font-size: 9pt;
+              color: #fff;
+              border-radius: 2px;
+              background-color: #dcdcdc;
+            }
+          }
+          .message-body {
+            .avatar {
+              float: left;
+              margin: 0 10px 0 0;
+              border-radius: 3px;
+              width: 40px;
+              height: 40px;
+            }
+            .username {
+              color: #666;
+              max-width: 100px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              margin-bottom: 5px;
+            }
+            .text {
+              display: inline-block;
+              position: relative;
+              padding: 5px 10px;
+              max-width: calc(100% - 40px);
+              min-height: 30px;
+              line-height: 20px;
+              font-size: 14px;
+              text-align: left;
+              word-break: break-all;
+              background-color: #fafafa;
+              border-radius: 4px;
+            }
+            .text:before {
+              content: " ";
+              position: absolute;
+              top: 9px;
+              right: 100%;
+              border: 6px solid transparent;
+              border-right-color: #fafafa;
+            }
+          }
+          .self {
+            text-align: right;
+            .avatar {
+              float: right;
+              margin: 0 0 0 10px;
+            }
+            .text {
+              background-color: #b2e281;
+            }
+            .username {
+              display: none;
+            }
+            .text:before {
+              right: inherit;
+              left: 100%;
+              border-right-color: transparent;
+              border-left-color: #b2e281;
+            }
+          }
+          .system {
+            text-align: center;
+            .text {
+              background-color: #dcdcdc;
+              color: #fff;
+              min-height: 26px;
+              max-width: 80%;
+            }
+            .text:before {
+              border: transparent;
+            }
+          }
+        }
+        img {
+          max-width: 100px;
+          display: block;
+        }
+        img.emoji {
+          max-width: 100%;
+          display: inline-block;
+        }
+        .timespan {
+          color: #ddd;
+        }
+        .emoji {
+          display: inline;
+        }
       }
-      img.emoji {
-        display: inline-block;
+      .hiden {
+        display: none;
       }
-      .timespan {
-        color: #ddd;
-      }
-      .emoji{
-        display: inline;
+      .mCSB_outside+.mCS-minimal-dark.mCSB_scrollTools_vertical {
+        right: -20px;
       }
     }
     .send-board {
       position: relative;
+      border-top: 1px solid #eee;
       .operations {
-        height: 30px;
+        height: 40px;
+        padding: 5px 0;
+        .btn {
+          padding: 3px 10px;
+        }
         .image-lable {
           position: relative;
           input[name=image] {
@@ -521,8 +634,7 @@ button:hover {
         }
       }
       .message {
-        width: 440px;
-        max-width: 440px;
+        width: 100%;
         height: 90px;
         max-height: 90px;
         display: inline-block;
@@ -550,15 +662,22 @@ button:hover {
         -moz-box-sizing: border-box;
         box-sizing: border-box;
       }
-      .btn.btn-send {
-        width: 50px;
-        height: 96px;
-        float: right;
+      .btn.btn-info {
+        position: absolute;
+        right: 40px;
+        bottom: 10px;
+        padding: 4px 12px;
+      }
+      .toast-board {
+        position: absolute;
+        right: 25px;
+        bottom: 50px;
       }
     }
     .emoji-board {
       display: none;
       width: 400px;
+      max-width: 100%;
       bottom: 40px;
       left: 0;
       position: absolute;
@@ -578,7 +697,8 @@ button:hover {
           height: 25px;
         }
         img:hover {
-          background-color: blue;
+          background-color: #c0f0f3;
+          cursor: pointer;
         }
       }
       .emoji-tabs {
@@ -592,6 +712,14 @@ button:hover {
           background: #fff;
         }
       }
+    }
+    .toast-board {
+      display: none;
+      transition: opacity 1s ease-out;
+      z-index: 999;
+      border: 1px solid #ccc;
+      padding: 2px 12px;
+      border-radius: 3px;
     }
   }
 }

@@ -40,8 +40,8 @@ app.use(expressValidator());
 
  
 var sessionStore = new RedisStore({
-  "host": "127.0.0.1",
-  "port": "6379",
+  "host": config.redis.host,
+  "port": config.redis.port,
 });
 
 app.use(expressValidator({
@@ -84,7 +84,8 @@ app.use(session({
 app.use(flash());
 
 app.use(function (req, res, next) {
-	res.locals.user = req.session.user;
+  res.locals.user = req.session.user;
+	res.locals.staticUrl = config.static;
   res.locals.ebook = {
     title: pkg.name,
     description: pkg.description,
@@ -103,7 +104,7 @@ app.use(function (req, res, next) {
     return hashids.encode(arr);
   }
 	next();
-})
+});
 
 app.io = io;
 var socketLib = require('./lib/socket')(io, sessionStore);

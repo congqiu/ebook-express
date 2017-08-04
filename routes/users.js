@@ -74,22 +74,19 @@ router.post('/login', checkNotLogin, function(req, res, next) {
         });
       }
     } else {
-      console.log(result.useFirstErrorOnly().mapped());
-      res.render('login', {errors: result.useFirstErrorOnly().mapped()});
+      res.render('login', {errors: result.useFirstErrorOnly().mapped(), referer: target});
     }
   });
   function loginAction(userResult) {
     if (userResult.success) {
       user = userResult.data[0];
       if (!user) {
-        req.flash('errors', '用户名或密码错误');
-        return res.redirect('/login');
+        return res.redirect('/login', {errors: '用户名或密码错误', referer: target});
       }
       var md5pwd = md5.update(new Buffer(user.username + password + user.create_time)).digest('hex');
      
       if (user.md5pwd !== md5pwd) {
-        req.flash('errors', '用户名或密码错误');
-        return res.redirect('/login');
+        return res.redirect('/login', {errors: '用户名或密码错误', referer: target});
       }
       delete user.password;
       delete user.md5pwd;
@@ -99,6 +96,8 @@ router.post('/login', checkNotLogin, function(req, res, next) {
       } else {
         res.redirect('/book');
       }
+    } else {
+      return res.render('login', {errors: '系统出错，请稍后再试！', referer: target});
     }
   }
 });

@@ -2,6 +2,7 @@ module.exports = {
 	port: 3000,
 	baseUrl: 'http://www.book.xyz',
 	proxy: 'http://10.1.0.192:3000',
+	static: '//static.qiucong.xin',
 	session: {
 		secret: 'ebook',
 		key: 'ebook',
@@ -19,5 +20,9 @@ module.exports = {
 		apikey: '',
 		domain: '',
 		from: ''
+	},
+	redis: {
+		host: '127.0.0.1',
+		port: '6379'
 	}
 }
